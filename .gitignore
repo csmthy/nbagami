@@ -1,0 +1,6 @@
+.env
+scorigami.db
+tweets.db
+player_stats.csv
+__pycache__/
+.DS_Store

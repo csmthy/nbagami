@@ -1,0 +1,29 @@
+name: NBAgami bot
+
+# While the bot was live this ran every five minutes during the season:
+#   schedule:
+#     - cron: '*/5 * * * *'
+# It's manual-only now that the account is retired.
+on:
+  workflow_dispatch:
+
+jobs:
+  run_bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run bot
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+        run: python bot.py
